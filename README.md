@@ -20,7 +20,7 @@ This repository contains a React application for generating Secret Santa pairing
 
    npm install
 
-Running the Application
+## Running the Application
 
   1.  Start the development server:
   
