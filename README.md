@@ -17,13 +17,13 @@ This repository contains a React application for generating Secret Santa pairing
    cd secret-santa-react
 
 3. Install dependencies:
-  ```bash
+
    npm install
 
 Running the Application
 
   1.  Start the development server:
-  ```bash
+  
    npm start
 
   2. Open your browser and visit http://localhost:5173/ to access the application.
@@ -46,7 +46,7 @@ Running the Application
 
   -View Pairings:
         The generated pairings will be displayed on the screen, showing who gives a gift to whom.
-        
+
   ### Testing
   To run unit tests for the application:
   -Run the following command in your terminal:
