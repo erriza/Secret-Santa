@@ -31,7 +31,7 @@ const createGraph = (
       }
     });
   });
-
+  console.log('graph con info', graph);
   return graph;
 };
 
@@ -55,41 +55,43 @@ const hasBeenPairedRecently = (
 // Helper function for DFS to find an augmenting path
 const dfs = (
   graph: Record<string, Set<string>>,
-  u: string,
-  pairU: Record<string, string>,
-  pairV: Record<string, string>,
+  currentGiver: string,
+  giverToReceiver: Record<string, string>,
+  receiverToGiver: Record<string, string>,
   visited: Set<string>
 ): boolean => {
-  for (const v of graph[u]) {
-    if (!visited.has(v)) {
-      visited.add(v);
-      if (!pairV[v] || dfs(graph, pairV[v], pairU, pairV, visited)) {
-        pairU[u] = v;
-        pairV[v] = u;
-        return true;
+  for (const potentialReceiver of graph[currentGiver]) {
+    if (!visited.has(potentialReceiver)) {
+      visited.add(potentialReceiver);
+      //If the potential receiver is unmatched OR if a path can be augmented from the receivers current giver
+      if (!receiverToGiver[potentialReceiver] || 
+          dfs(graph, receiverToGiver[potentialReceiver], giverToReceiver, receiverToGiver, visited)) {
+        giverToReceiver[currentGiver] = potentialReceiver;
+        receiverToGiver[potentialReceiver] = currentGiver;
+        return true; //augmented path found!
       }
     }
   }
-  return false;
+  return false; // No augmenting path found from this giver
 };
 
 // Hopcroft-Karp algorithm to find maximum bipartite matching
 const hopcroftKarp = (graph: Record<string, Set<string>>): Record<string, string> => {
-    const pairU: Record<string, string> = {};
-    const pairV: Record<string, string> = {};
+    const giverToReceiver: Record<string, string> = {}; //Maps giver to receiver
+    const receiverToGiver: Record<string, string> = {}; //Maps receiver to giver
     let foundPath = true;
   
     while (foundPath) {
       foundPath = false;
-      const visited = new Set<string>();
-      for (const u in graph) {
-        if (!pairU[u] && dfs(graph, u, pairU, pairV, visited)) {
-          foundPath = true;
+      const visitedNodes = new Set<string>();
+      for (const giver in graph) {
+        if (!giverToReceiver[giver] && dfs(graph, giver, giverToReceiver, receiverToGiver, visitedNodes)) {
+          foundPath = true; // found path, so continue searching
         }
       }
     }
   
-    return pairU;
+    return giverToReceiver; // return the final matching giver to receiver
   };
   
 
@@ -99,8 +101,6 @@ const generateSecretSanta = (
     pairingsHistory: Record<string, [string, number][]>,
     currentYear: number
   ): [Record<string, string>, string | null] => {
-//   const currentYear = new Date().getFullYear();
-//   const pairingsHistory: Record<string, [string, number][]> = {};
   // Create graph
   const graph = createGraph(families, pairingsHistory, currentYear);
 
@@ -109,9 +109,7 @@ const generateSecretSanta = (
 
   // Check if we have a complete matching
   const allMembers = families.flatMap((family) => family.members);
-  console.log('Objects keys', Object.keys(pairings).length)
-  console.log('allmembers', allMembers.length);
-  console.log('validation', allMembers.length % 2 !== 0);
+  
   if (Object.keys(pairings).length !== allMembers.length) {
     if (allMembers.length % 2 !== 0) {
       return [{}, 'Could not generate valid pairings. An odd number of members cannot be paired.'];
@@ -127,7 +125,7 @@ const generateSecretSanta = (
   }
   console.log('history', pairingsHistory)
 
-  return [pairings, null];
+  return [pairings, null]; // Return the pairings and no error message
 };
 
 export default generateSecretSanta;

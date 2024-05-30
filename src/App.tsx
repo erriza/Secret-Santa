@@ -35,14 +35,20 @@ function App() {
 };
 
   return (
-    <>
-      <h1>Secret Santa</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4">
+      
+      <h1 className='text-4xl font-bold mb-8 flex items-center justify-center gap-4'>
+        <GiftIcon />
+          Secret Santa
+        <GiftIcon />
+      </h1>
+      
       <FamilyFormComponent
         families={families}
         setFamilies={setFamilies}
       />
 
-      <h2>Family members:</h2>
+      <h2 className='text-2xl font-semibold mb-4'>Family members:</h2>
       <FamilyListComponent
         families={families}
       />
@@ -54,8 +60,30 @@ function App() {
         families={families} 
       />
 
-    </>
+    </div>
   );
 }
 
 export default App;
+
+function GiftIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ width: '24px', height: '24px', color: 'green', fill: 'none' }}
+    >
+      <rect x="3" y="8" width="18" height="4" rx="1" />
+      <path d="M12 8v13" />
+      <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+      <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+    </svg>
+  )
+}

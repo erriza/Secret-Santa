@@ -92,7 +92,7 @@ describe("generate Secret Santa", () => {
         const currentYear = new Date().getFullYear();
         const [pairings, error] = generateSecretSanta(families, pairingHistory, currentYear);
 
-        expect(error).toBe("Could not generate valid pairings. Please try again or adjust family members.");
+        expect(error).toBe("Could not generate valid pairings. An odd number of members cannot be paired.");
         expect(pairings).toEqual({});
     });
 
@@ -140,7 +140,7 @@ describe("generate Secret Santa", () => {
         const currentYear = new Date().getFullYear();
         const [pairings, error] = generateSecretSanta(families, pairingHistory, currentYear);
 
-        expect(error).toBe("Could not generate valid pairings. Please try again or adjust family members.");
+        expect(error).toBe("Could not generate valid pairings. Please try adjusting family members or the 3-year rule.");
         expect(pairings).toEqual({});
     });
 
