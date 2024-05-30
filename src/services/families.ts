@@ -9,6 +9,15 @@ const getAllFamilies = async() => {
     return data;
 }
 
+const addFamily = async(newFamily: Family) => {
+    const { data } = await axios.post<Family>(
+        `${apiBaseUrl}/families`,
+        newFamily
+    );
+    return data;
+}
+
 export default {
-    getAllFamilies
+    getAllFamilies,
+    addFamily
 }
