@@ -7,6 +7,7 @@ const exampleFamilyData : Family[] = [
         { name: "John Smith", familyId: 1 },
         { name: "Jane Smith", familyId: 1 }, 
         { name: "Emily Smith", familyId: 1 }, 
+        { name: "Pedro Smith", familyId: 1 },
       ],
     },
     {

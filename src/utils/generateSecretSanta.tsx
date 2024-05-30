@@ -109,8 +109,15 @@ const generateSecretSanta = (
 
   // Check if we have a complete matching
   const allMembers = families.flatMap((family) => family.members);
+  console.log('Objects keys', Object.keys(pairings).length)
+  console.log('allmembers', allMembers.length);
+  console.log('validation', allMembers.length % 2 !== 0);
   if (Object.keys(pairings).length !== allMembers.length) {
-    return [{}, 'Could not generate valid pairings. Please try again or adjust family members.'];
+    if (allMembers.length % 2 !== 0) {
+      return [{}, 'Could not generate valid pairings. An odd number of members cannot be paired.'];
+    } else {
+      return [{}, 'Could not generate valid pairings. Please try adjusting family members or the 3-year rule.'];
+    }
   }
 
   // Update pairings history

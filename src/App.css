@@ -40,3 +40,79 @@
 .read-the-docs {
   color: #888;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 400px; /* Adjust the width as needed */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41; /* Darker Green */
+}
+
+/* Family Container (Card) */
+.family-container {
+  display: flex;
+  flex-direction: column; /* Arrange content vertically within card */
+  align-items: flex-start; /* Align content to the left */
+  width: 250px; 
+  margin: 10px; 
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ... rest of your CSS ... */
+
+/* Add a wrapper container for horizontal card display */
+.families-container {
+  display: flex; /* Use Flexbox for horizontal layout */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line if necessary */
+  justify-content: space-between; /* Add spacing between cards */
+}
+
+/* Family Name */
+.family-name {
+  font-weight: bold;
+  margin-bottom: 10px; 
+}
+
+/* Family Members List */
+.family-members {
+  list-style: none; 
+  padding: 0; 
+  display: flex; 
+  flex-direction: column; /* Keep members vertical */
+  gap: 5px; 
+}
+
+.family-members li {
+  margin-left: 10px; /* Add some indentation */
+}
