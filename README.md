@@ -57,6 +57,39 @@ To run unit tests for the application:
   npm run test
   ```
 
+**End-to-End Tests (Cypress):**
+1. **Install Cypress:**
+   ```bash
+   npm install cypress --save-dev
+   ```
+2. **Run Cypress:**
+   ```bash
+   npx cypress open
+   ```
+   This will open the Cypress Test Runner.  You can then choose the test files to run.
+
+**Example Cypress Test:**
+```javascript
+// cypress/integration/front-page.spec.js (or .ts)
+describe('Families', () => { 
+  beforeEach(() => {
+    cy.visit('http://localhost:5173');
+  });
+  it('front page can be opened', () => { 
+    cy.contains('Secret Santa');
+  });
+  it('contains families', () => {
+    cy.contains('Family members:');
+  });
+  it('new family can be added', () => {
+    cy.get('#familyName').type('The Ricos');
+    cy.get('#memberName').type('Erick Rico');
+    cy.get('#addFamily-button').click();
+    cy.contains('Erick Rico');
+  });
+});
+```
+
 ### Features
 
 - **Efficient Pairing Generation:** Utilizes the Hopcroft-Karp algorithm for efficient pairing generation.
@@ -73,6 +106,8 @@ Feel free to contribute to the project by reporting issues, submitting pull requ
   - [Hopcroft-Karp Algorithm](https://en.wikipedia.org/wiki/Hopcroft%E2%80%93Karp_algorithm) `for efficient bipartite matching`.
 
   - React for building the user interface.
+
+  - Cypress for e2e testing.
 
   - Jest for unit testing.
 
