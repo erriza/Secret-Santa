@@ -1,6 +1,12 @@
 import { Family, FamilyMember } from "../../types";
 
-// Function to create the adjacency list for the graph
+/**
+ * Function to create the adjacency list for the graph
+ * @param families all families fetched from db.
+ * @param pairingsHistory The history of past pairings.
+ * @param currentYear The current year.
+ * @returns Created adjacency list for the graphs.
+ */
 const createGraph = (
   families: Family[],
   pairingsHistory: Record<string, [string, number][]>,
@@ -35,7 +41,15 @@ const createGraph = (
   return graph;
 };
 
-// Function to check if a pairing happened within the last 3 years
+
+/**
+ * Checks if two members have been paired within the last 3 years.
+ * @param giver The member giving the gift.
+ * @param receiver The member receiving the gift.
+ * @param pairingsHistory The history of past pairings.
+ * @param currentYear The current year.
+ * @returns True if the members have been paired recently, false otherwise.
+ */
 const hasBeenPairedRecently = (
   giver: FamilyMember,
   receiver: FamilyMember,
@@ -52,7 +66,16 @@ const hasBeenPairedRecently = (
   );
 };
 
-// Helper function for DFS to find an augmenting path
+
+/**
+ * Performs a Depth-First Search (DFS) to find an augmenting path in the bipartite graph.
+ * @param graph The adjacency list representing the graph.
+ * @param currentGiver The current giver node.
+ * @param giverToReceiver Mapping of givers to receivers.
+ * @param receiverToGiver Mapping of receivers to givers.
+ * @param visited Set of nodes visited during the search.
+ * @returns True if an augmenting path is found, false otherwise.
+ */
 const dfs = (
   graph: Record<string, Set<string>>,
   currentGiver: string,
@@ -75,7 +98,11 @@ const dfs = (
   return false; // No augmenting path found from this giver
 };
 
-// Hopcroft-Karp algorithm to find maximum bipartite matching
+/**
+ * Implements the Hopcroft-Karp algorithm to find the maximum bipartite matching in a graph.
+ * @param graph The adjacency list representing the bipartite graph.
+ * @returns A mapping of givers to receivers representing the maximum matching.
+ */
 const hopcroftKarp = (graph: Record<string, Set<string>>): Record<string, string> => {
     const giverToReceiver: Record<string, string> = {}; //Maps giver to receiver
     const receiverToGiver: Record<string, string> = {}; //Maps receiver to giver
@@ -95,7 +122,13 @@ const hopcroftKarp = (graph: Record<string, Set<string>>): Record<string, string
   };
   
 
-// Main function to generate Secret Santa pairings
+/**
+ * Generates Secret Santa pairings using the Hopcroft-Karp algorithm to find a maximum matching in a bipartite graph.
+ * @param families An array of Family objects representing the families participating.
+ * @param pairingsHistory A record of past pairings, storing the history for each giver.
+ * @param currentYear The current year for pairing.
+ * @returns An array containing the generated pairings (giver to receiver mapping) and an error message (if any).
+ */
 const generateSecretSanta = (
     families: Family[],
     pairingsHistory: Record<string, [string, number][]>,

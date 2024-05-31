@@ -7,9 +7,19 @@ interface Props {
 }
 
 const FamilyFormComponent = ({ families, setFamilies }: Props) => {
+    /**
+     * State to store the new family name
+     * State to store the new member name
+     */
     const [newFamilyName, setNewFamilyName] = useState('');
     const [newMemberName, setNewMemberName] = useState('');
 
+    /**
+     * Handles form submission to add a new family member.
+     * Creates a new family member object and adds it to the existing family or creates a new family if the family name doesn't exist.
+     * Updates the families state.
+     * @param event The form submission event.
+     */
     const addFamilyMember = (event: React.SyntheticEvent) => {
         event.preventDefault();
     

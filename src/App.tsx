@@ -11,10 +11,21 @@ import FamilyListComponent from './components/familyListcomponent';
 import SecretSantaResultsComponent from './components/secretSantaResultsComponent';
 
 function App() {
+
+  /**
+   * State to store the list of families
+   * State to store the generated Secret Santa pairings
+   * State to store any error that occurs during pairing generation
+   */
   const [families, setFamilies] = useState<Family[]>([]);
   const [pairings, setPairings] = useState<Record<string, string>>({});
   const [pairingError, setPairingError] = useState<string | null>(null);
 
+  /**
+   * Perform a simple ping to the backend server
+   * Fetch initial families on component mount
+   * Set initial families from local data (for development/testing)
+   */
   useEffect(() => {
     void axios.get<void>(`${apiBaseUrl}/ping`);
 
@@ -26,6 +37,7 @@ function App() {
     setFamilies(familyData);
   }, []);
 
+  // function to generate Secret Santa pairings
   const generatePairings = () => {
     const currentYear = new Date().getFullYear();
     const pairingHistory = {}
