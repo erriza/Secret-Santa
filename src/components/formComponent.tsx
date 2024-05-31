@@ -73,7 +73,7 @@ const FamilyFormComponent = ({ families, setFamilies }: Props) => {
                 placeholder="Member Name"
                 required
               />
-              <button type="submit" className="w-full bg-green-600 text-white my-3">Add new family Member</button>
+              <button id="addFamily-button" type="submit" className="w-full bg-green-600 text-white my-3">Add new family Member</button>
             </div>
           </div>
         </form>
