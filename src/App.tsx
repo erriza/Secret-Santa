@@ -63,6 +63,7 @@ function App() {
       <h2 className='text-2xl font-semibold mb-4'>Family members:</h2>
       <FamilyListComponent
         families={families}
+        setFamilies={setFamilies}
       />
 
       <SecretSantaResultsComponent

@@ -1,31 +1,53 @@
 import { Family } from "../../types"
+import familyService from "../services/families";
 
 interface Props {
-    families: Family[];
+  families: Family[];
+  setFamilies: React.Dispatch<React.SetStateAction<Family[]>>;
 }
-const FamilyListComponent = ({ families }: Props) => {
-    return (
-        <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl items-stretch p-3">
+const FamilyListComponent = ({ families, setFamilies }: Props) => {
+
+  const handleRemoveMember = async (familyId: string, memberId: string) => { // familyId is now a string
+    try {
+      await familyService.removeMember(familyId, memberId); 
+      const updatedFamilies = await familyService.getAllFamilies(); 
+      setFamilies(updatedFamilies); 
+    } catch (error) {
+      // Handle error
+      console.error("Error removing member:", error);
+    }
+  };
+  
+  console.log('data', families)
+  return (
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl items-stretch p-3">
         {families.map((family) => (
           <div key={family.name} className="bg-gray-100 text-gray-900 shadow-md flex flex-col p-4 rounded-md">
             <div className="border-b pb-2">
               <div className="flex items-center justify-between">
-                <h3 className="">{family.name}</h3> 
-                <GiftIcon/>
+                <h3 className="">{family.name}</h3>
+                <GiftIcon />
               </div>
             </div>
             <ul className="p-4">
               {family.members.map((member) => (
-                <li key={member.name}>{member.name}</li>
+                <li key={member._id.toString()}>
+                  {member.name}
+                  <button onClick={() => handleRemoveMember(family._id.toString(), member._id.toString())} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full m-1">
+                    <svg className="h-2 w-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </li>
               ))}
             </ul>
           </div>
         ))}
       </div>
-        </div>
-    )
-}
+    </div>
+  );
+};
 
 export default FamilyListComponent
 

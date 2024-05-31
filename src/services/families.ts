@@ -26,7 +26,31 @@ const addFamily = async(newFamily: Family) => {
     return data;
 }
 
+/**
+ * Remove a member of a family to the backend server.
+ * @param familyId The Id of the family to delete
+ * @param memberId The Id of the memeber to delete
+ * @returns The response of the status code
+ */
+const removeMember = async (familyId: string, memberId: string) => { 
+    await axios.delete(`${apiBaseUrl}/families/${familyId}/members/${memberId}`); 
+};
+
+
+const addFamilyOrMember = async (data: { familyName: string; memberName: string }): Promise<{ message: string; family: Family }> => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const { data: response } = await axios.post<{ message: string; family: Family }>(`${apiBaseUrl}/families`, data); // Update the response type
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
 export default {
     getAllFamilies,
-    addFamily
+    addFamily,
+    removeMember,
+    addFamilyOrMember
+
 }
