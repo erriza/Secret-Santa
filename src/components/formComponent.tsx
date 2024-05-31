@@ -17,44 +17,8 @@ const FamilyFormComponent = ({ families, setFamilies }: Props) => {
     const [newFamilyName, setNewFamilyName] = useState('');
     const [newMemberName, setNewMemberName] = useState('');
 
-    /**
-     * Handles form submission to add a new family member.
-     * Creates a new family member object and adds it to the existing family or creates a new family if the family name doesn't exist.
-     * Updates the families state.
-     * @param event The form submission event.
-     */
-    // const addFamilyMember = (event: React.SyntheticEvent) => {
-    //     event.preventDefault();
-    
-    //     const newMember: FamilyMember = {
-    //       name: newMemberName,
-    //       familyId: families.findIndex(f => f.name === newFamilyName) + 1,
-    //       _id: new Types.ObjectId()
 
-    //       // familyId: families.length > 0 ? Math.max(...families.map(f => f.members.length > 0 ? Math.max(...f.members.map(m => m.familyId)) : 0)) + 1 : 1
-    //     };
-    
-    //     const existingFamilyIdx = families.findIndex(f => f.name === newFamilyName);
-    
-    //     if (existingFamilyIdx !== -1) {
-    //       const updatedFamilies = [...families];
-    //       updatedFamilies[existingFamilyIdx].members.push(newMember);
-    //       setFamilies(updatedFamilies);
-    //     } else {
-    //       const newFamily: Family = {
-    //         name: newFamilyName,
-    //         members: [newMember],
-    //         familyId: families.findIndex(f => f.name === newFamilyName) + 1,
-    //         _id: new Types.ObjectId()
-    //       };
-    //       setFamilies([...families, newFamily]);
-    //     }
-    
-    //     setNewFamilyName('');
-    //     setNewMemberName('');
-    //   };
-
-        /**
+      /**
      * Handles form submission to add a new family member.
      * Creates a new family member object and adds it to the existing family or creates a new family if the family name doesn't exist.
      * Updates the families state.
@@ -80,7 +44,6 @@ const FamilyFormComponent = ({ families, setFamilies }: Props) => {
             setNewFamilyName('');
             setNewMemberName('');
           } catch (error) {
-            // Handle error
             console.error("Error creating family or adding member:", error);
           }
         };

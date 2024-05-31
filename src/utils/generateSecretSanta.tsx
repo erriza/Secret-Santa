@@ -22,8 +22,8 @@ const createGraph = (
     graph[member.name] = new Set();
   });
 
-  console.log('inicia allmembers',allMembers);
-  console.log('inicia graph',graph);
+  console.log('allmembers Start',allMembers);
+  console.log('created graph for each familieMember with empty set for possible pairings',graph);
 
   // Add edges between valid pairings
   allMembers.forEach((giver) => {
@@ -37,7 +37,7 @@ const createGraph = (
       }
     });
   });
-  console.log('graph con info', graph);
+  console.log('graph con info, possible pairings', graph);
   return graph;
 };
 
@@ -157,6 +157,7 @@ const generateSecretSanta = (
     pairingsHistory[giver].push([pairings[giver], currentYear]);
   }
   console.log('history', pairingsHistory)
+  console.log('pairings', pairings)
 
   return [pairings, null]; // Return the pairings and no error message
 };

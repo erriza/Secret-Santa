@@ -9,8 +9,8 @@ const FamilyListComponent = ({ families, setFamilies }: Props) => {
 
   const handleRemoveMember = async (familyId: string, memberId: string) => { // familyId is now a string
     try {
-      await familyService.removeMember(familyId, memberId); 
-      const updatedFamilies = await familyService.getAllFamilies(); 
+      await familyService.removeMember(familyId, memberId);
+      const updatedFamilies = await familyService.getAllFamilies();
       setFamilies(updatedFamilies); 
     } catch (error) {
       // Handle error
@@ -18,7 +18,6 @@ const FamilyListComponent = ({ families, setFamilies }: Props) => {
     }
   };
   
-  console.log('data', families)
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl items-stretch p-3">
